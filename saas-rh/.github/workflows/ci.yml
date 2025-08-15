@@ -1,0 +1,21 @@
+name: CI
+on: [push, pull_request]
+jobs:
+  ci:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: '20' }
+      - run: npm ci
+      - run: npm run lint
+      - run: npm run typecheck
+      - run: npm test --workspaces --if-present
+      - name: SAST
+        uses: github/codeql-action/init@v3
+        with: { languages: javascript }
+      - uses: github/codeql-action/analyze@v3
+      - name: Build
+        env:
+          NEXT_TELEMETRY_DISABLED: '1'
+        run: npm run build

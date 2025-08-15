@@ -1,0 +1,19 @@
+{
+  "name": "saas-rh",
+  "private": true,
+  "workspaces": ["apps/*", "packages/*"],
+  "scripts": {
+    "build": "turbo run build",
+    "dev": "turbo run dev",
+    "lint": "turbo run lint",
+    "typecheck": "turbo run typecheck",
+    "test": "turbo run test",
+    "migrate": "node infra/migrations/run.js"
+  },
+  "devDependencies": {
+    "turbo": "^2.0.0",
+    "typescript": "^5.4.0",
+    "pg": "^8.11.3"
+  },
+  "packageManager": "npm@10.8.2"
+}
